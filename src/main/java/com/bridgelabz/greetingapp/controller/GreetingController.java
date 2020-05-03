@@ -32,7 +32,7 @@ public class GreetingController {
 
     @PostMapping("/post")
     public Greeting postGreeting(@RequestBody User user) {
-        return new Greeting(counter.incrementAndGet(), greetingService.getGreeting(user.getFirstName(), user.getLastName()));
+        return greetingService.addGreeting(user);
     }
 
     @PutMapping("/put")
