@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
+@RequestMapping("/greetingController")
 public class GreetingController {
 
     private AtomicLong counter = new AtomicLong();
