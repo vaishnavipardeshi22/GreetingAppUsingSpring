@@ -2,10 +2,11 @@ package com.bridgelabz.greetingapp.controller;
 
 import com.bridgelabz.greetingapp.model.Greeting;
 import com.bridgelabz.greetingapp.model.User;
-import com.bridgelabz.greetingapp.service.GreetingService;
+import com.bridgelabz.greetingapp.service.InterfaceGreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
@@ -14,29 +15,30 @@ public class GreetingController {
     private AtomicLong counter = new AtomicLong();
 
     @Autowired
-    GreetingService greetingService;
+    private InterfaceGreetingService greetingService;
 
-    @RequestMapping("/greeting")
-    public String greeting() {
-        return greetingService.getGreeting();
-    }
-    @GetMapping("/param/greeting")
-    public Greeting getGreeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return new Greeting(counter.incrementAndGet(), greetingService.getGreeting(name));
+    @RequestMapping("/greeting/get/{id}")
+    public Greeting greeting(@PathVariable long id) {
+        return greetingService.getGreeting(id);
     }
 
-    @GetMapping("/greeting")
-    public Greeting getGreeting() {
-        return new Greeting(counter.incrementAndGet(), greetingService.getGreeting());
+    @GetMapping("/greeting/get/all")
+    public List<Greeting> getGreeting() {
+        return greetingService.getAllGreeting();
     }
 
-    @PostMapping("/post")
+    @PostMapping("/greeting/post")
     public Greeting postGreeting(@RequestBody User user) {
         return greetingService.addGreeting(user);
     }
 
-    @PutMapping("/put")
-    public Greeting putGreeting(@PathVariable String firstName, @RequestParam(value = "lastName") String lastName) {
-        return new Greeting(counter.incrementAndGet(), greetingService.getGreeting(firstName, lastName));
+    @PutMapping("/greeting/put/{id}")
+    public Greeting putGreeting(@PathVariable long id, @RequestParam(value = "name") String name) {
+        return greetingService.getUpdateGreeting(id, name);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteGreeting(@PathVariable long id) {
+        greetingService.getDeleteGreeting(id);
     }
 }
