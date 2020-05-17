@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
-public class ImplementedGreetingServices implements InterfaceGreetingService {
+public class GreetingServicesImpl implements IGreetingService {
 
     private final AtomicLong counter = new AtomicLong();
     private static final String template = "Hello, %s!";

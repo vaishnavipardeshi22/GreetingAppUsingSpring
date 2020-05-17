@@ -5,7 +5,7 @@ import com.bridgelabz.greetingapp.model.User;
 
 import java.util.List;
 
-public interface InterfaceGreetingService {
+public interface IGreetingService {
     Greeting getGreeting(long id);
 
     Greeting addGreeting(User user);

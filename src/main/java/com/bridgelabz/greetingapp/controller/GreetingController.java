@@ -2,7 +2,7 @@ package com.bridgelabz.greetingapp.controller;
 
 import com.bridgelabz.greetingapp.model.Greeting;
 import com.bridgelabz.greetingapp.model.User;
-import com.bridgelabz.greetingapp.service.InterfaceGreetingService;
+import com.bridgelabz.greetingapp.service.IGreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +16,7 @@ public class GreetingController {
     private AtomicLong counter = new AtomicLong();
 
     @Autowired
-    private InterfaceGreetingService greetingService;
+    private IGreetingService greetingService;
 
     @RequestMapping("/greeting/get/{id}")
     public Greeting greeting(@PathVariable long id) {
